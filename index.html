@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Sora 2 Codes</title>
+  <title>Sora 2 Code Timer | Live Sora Invite Countdown</title>
+  <meta name="description" content="Live universal Sora 2 code timer. Tracks Sora 2 and Sora AI invite codes in real-time, updating every 15 minutes globally. Perfect for finding your next invite code." />
+  <meta name="keywords" content="sora 2 code, sora ai code, sora 2 invite code, sora code invite, sora ai invite, how to get sora 2 invite, sora code reddit, sora ai invite code, sora 2 reddit, reddit sora code, sora 2 codes" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://yourdomain.com/" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <!-- ✅ Google Analytics (GA4) -->
+  <!-- ✅ Schema (structured data for Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Sora 2 Code Timer",
+    "description": "Live 15-minute universal countdown revealing Sora 2 and Sora AI invite codes.",
+    "url": "https://soracodes.vercel.app",
+    "applicationCategory": "Utility",
+    "operatingSystem": "All",
+    "keywords": ["sora 2 code","sora ai code","sora 2 invite code","sora ai invite","how to get sora 2 invite","reddit sora code"]
+  }
+  </script>
+
+  <!-- ✅ AdMaven placement -->
+  <meta name="admaven-placement" content="Bqja7rja7">
+
+  <!-- ✅ Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KEMFV0B0XP"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,10 +35,6 @@
     gtag('config', 'G-KEMFV0B0XP');
   </script>
 
-  <!-- ✅ AdMaven placement -->
-  <meta name="admaven-placement" content="Bqja7rja7">
-
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     html,body {
       height:100%;
@@ -44,47 +62,26 @@
       font-size:clamp(14px,2.8vw,20px);
       opacity:.85;
     }
-    .note {
-      margin-top:8px;
-      font-size:12px;
-      opacity:.6;
-    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="code" id="code"></div>
     <div class="timer" id="timer"></div>
-    <div class="note"></div>
     <div style="margin-top:24px;"><ins id="admaven-ad"></ins></div>
   </div>
 
   <script>
-    // --- Hidden Code Sequence (obfuscated) ---
-    const e = ["WEo2SlJL","NDlTTjFQ","RUpLOVBO","WEo2SlJL","NDlTTjFQ","NVIyTkIx","WEo2SlJL","RUpLOVBO"];
-    const rS = 10; // reveal seconds
-    const bMs = 15 * 60 * 1000; // 15 min in ms
-    const c = document.getElementById("code");
-    const t = document.getElementById("timer");
-
+    // Hidden universal 15-minute reveal logic
+    const e=["WEo2SlJL","NDlTTjFQ","RUpLOVBO","WEo2SlJL","NDlTTjFQ","NVIyTkIx","WEo2SlJL","RUpLOVBO"];
+    const rS=10,bMs=15*60*1000,c=document.getElementById("code"),t=document.getElementById("timer");
     function u(){
-      const n = Date.now();
-      const i = Math.floor(n / bMs);
-      const s = i * bMs;
-      const nx = s + bMs;
-      const idx = i % e.length;
-      const cd = atob(e[idx]);
-      const sec = (n - s) / 1000;
-
-      c.textContent = sec < rS ? cd : "";
-      const rem = Math.max(0, Math.floor((nx - n) / 1000));
-      const m = String(Math.floor(rem / 60)).padStart(2,"0");
-      const s2 = String(rem % 60).padStart(2,"0");
-      t.textContent = `${m}:${s2}`;
+      const n=Date.now(),i=Math.floor(n/bMs),s=i*bMs,nx=s+bMs,idx=i%e.length,cd=atob(e[idx]),sec=(n-s)/1e3;
+      c.textContent=sec<rS?cd:"";
+      const rem=Math.max(0,Math.floor((nx-n)/1e3)),m=String(Math.floor(rem/60)).padStart(2,"0"),s2=String(rem%60).padStart(2,"0");
+      t.textContent=`${m}:${s2}`;
     }
-
-    u();
-    setInterval(u, 1000);
+    u();setInterval(u,1e3);
   </script>
 
   <!-- ✅ Vercel Analytics -->
@@ -94,6 +91,4 @@
   <script data-cfasync="false" src="https://tag.admaven.net/tag.js"></script>
 </body>
 </html>
-
-
 
