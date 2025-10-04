@@ -55,7 +55,7 @@
   <div class="wrap">
     <div class="code" id="code"></div>
     <div class="timer" id="timer"></div>
-    <div class="note">Times are UTC. Code appears for 10 seconds every 15 minutes.</div>
+    <div class="note"></div>
     <div style="margin-top:24px;"><ins id="admaven-ad"></ins></div>
   </div>
 
@@ -80,7 +80,7 @@
       const rem = Math.max(0, Math.floor((nx - n) / 1000));
       const m = String(Math.floor(rem / 60)).padStart(2,"0");
       const s2 = String(rem % 60).padStart(2,"0");
-      t.textContent = `Next reveal in ${m}:${s2} (UTC)`;
+      t.textContent = `${m}:${s2}`;
     }
 
     u();
@@ -94,5 +94,6 @@
   <script data-cfasync="false" src="https://tag.admaven.net/tag.js"></script>
 </body>
 </html>
+
 
 
