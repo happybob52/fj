@@ -55,55 +55,36 @@
   <div class="wrap">
     <div class="code" id="code"></div>
     <div class="timer" id="timer"></div>
-    <div class="note">Times are UTC. Code appears for 10 seconds at 00:00, 00:15, 00:30, 00:45 (and repeats).</div>
-
-    <!-- Optional ad area (where AdMaven will inject ads) -->
-    <div style="margin-top:24px;">
-      <ins id="admaven-ad"></ins>
-    </div>
+    <div class="note">Times are UTC. Code appears for 10 seconds every 15 minutes.</div>
+    <div style="margin-top:24px;"><ins id="admaven-ad"></ins></div>
   </div>
 
   <script>
-    // --- CONFIG ---
-    // Sequence (Base64 encoded)
-    // XJ6JRK, 49SN1P, EJK9PN, XJ6JRK, 49SN1P, 5R2NB1, XJ6JRK, EJK9PN
-    const ENCODED_SEQUENCE = [
-      "WEo2SlJL", // XJ6JRK
-      "NDlTTjFQ", // 49SN1P
-      "RUpLOVBO", // EJK9PN
-      "WEo2SlJL", // XJ6JRK
-      "NDlTTjFQ", // 49SN1P
-      "NVIyTkIx", // 5R2NB1
-      "WEo2SlJL", // XJ6JRK
-      "RUpLOVBO"  // EJK9PN
-    ];
-    const REVEAL_SECONDS = 10;
-    const BLOCK_MS = 15 * 60 * 1000; // 15-minute blocks
+    // --- Hidden Code Sequence (obfuscated) ---
+    const e = ["WEo2SlJL","NDlTTjFQ","RUpLOVBO","WEo2SlJL","NDlTTjFQ","NVIyTkIx","WEo2SlJL","RUpLOVBO"];
+    const rS = 10; // reveal seconds
+    const bMs = 15 * 60 * 1000; // 15 min in ms
+    const c = document.getElementById("code");
+    const t = document.getElementById("timer");
 
-    const codeEl = document.getElementById("code");
-    const timerEl = document.getElementById("timer");
+    function u(){
+      const n = Date.now();
+      const i = Math.floor(n / bMs);
+      const s = i * bMs;
+      const nx = s + bMs;
+      const idx = i % e.length;
+      const cd = atob(e[idx]);
+      const sec = (n - s) / 1000;
 
-    function update() {
-      const nowMs = Date.now();
-      const blockIndex = Math.floor(nowMs / BLOCK_MS);
-      const blockStartMs = blockIndex * BLOCK_MS;
-      const nextBlockStartMs = blockStartMs + BLOCK_MS;
-      const seqIdx = blockIndex % ENCODED_SEQUENCE.length;
-      const CODE = atob(ENCODED_SEQUENCE[seqIdx]);
-      const secondsSinceStart = (nowMs - blockStartMs) / 1000;
-
-      // Show code for first 10s of every 15-min block
-      codeEl.textContent = (secondsSinceStart < REVEAL_SECONDS) ? CODE : "";
-
-      // Countdown to next reveal
-      const secRemaining = Math.max(0, Math.floor((nextBlockStartMs - nowMs) / 1000));
-      const m = String(Math.floor(secRemaining / 60)).padStart(2, "0");
-      const s = String(secRemaining % 60).padStart(2, "0");
-      timerEl.textContent = `Next code reveal in ${m}:${s} (UTC)`;
+      c.textContent = sec < rS ? cd : "";
+      const rem = Math.max(0, Math.floor((nx - n) / 1000));
+      const m = String(Math.floor(rem / 60)).padStart(2,"0");
+      const s2 = String(rem % 60).padStart(2,"0");
+      t.textContent = `Next reveal in ${m}:${s2} (UTC)`;
     }
 
-    update();
-    setInterval(update, 1000);
+    u();
+    setInterval(u, 1000);
   </script>
 
   <!-- ✅ Vercel Analytics -->
@@ -113,4 +94,5 @@
   <script data-cfasync="false" src="https://tag.admaven.net/tag.js"></script>
 </body>
 </html>
+
 
