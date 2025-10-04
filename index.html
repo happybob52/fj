@@ -54,7 +54,7 @@
 
     async function getCode() {
       try {
-        const r = await fetch("/code");
+        const r = await fetch("/api/code");
         const { code } = await r.json();
         codeEl.textContent = code || "";
       } catch (err) {
@@ -81,5 +81,6 @@
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
+
 
 
