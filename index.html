@@ -2,24 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Sora 2 Code Timer | Live Sora Invite Countdown</title>
-  <meta name="description" content="Live universal Sora 2 code timer. Tracks Sora 2 and Sora AI invite codes in real-time, updating every 15 minutes globally." />
-  <meta name="keywords" content="sora 2 code, sora ai code, sora 2 invite code, sora ai invite, how to get sora 2 invite, sora code invite, sora 2 codes, sora invite code" />
+  <title>Sora 2 Code Timer</title>
+  <meta name="description" content="Live universal Sora 2 code timer — updates every 15 minutes globally." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://yourdomain.com/" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <!-- ✅ AdMaven placement -->
-  <meta name="admaven-placement" content="Bqja7rja7">
-
-  <!-- ✅ Google Analytics (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KEMFV0B0XP"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-KEMFV0B0XP');
-  </script>
 
   <style>
     html,body {
@@ -60,26 +47,38 @@
     <div class="code" id="code"></div>
     <div class="timer" id="timer"></div>
     <div class="note">every 15 minutes a sora 2 code is revealed</div>
-    <div style="margin-top:24px;"><ins id="admaven-ad"></ins></div>
   </div>
 
   <script>
-    // Hidden universal 15-minute reveal logic
-    const e=["WEo2SlJL","NDlTTjFQ","RUpLOVBO","WEo2SlJL","NDlTTjFQ","NVIyTkIx","WEo2SlJL","RUpLOVBO"];
-    const rS=10,bMs=15*60*1000,c=document.getElementById("code"),t=document.getElementById("timer");
-    function u(){
-      const n=Date.now(),i=Math.floor(n/bMs),s=i*bMs,nx=s+bMs,idx=i%e.length,cd=atob(e[idx]),sec=(n-s)/1e3;
-      c.textContent=sec<rS?cd:"";
-      const rem=Math.max(0,Math.floor((nx-n)/1e3)),m=String(Math.floor(rem/60)).padStart(2,"0"),s2=String(rem%60).padStart(2,"0");
-      t.textContent=`${m}:${s2}`;
+    const codeEl = document.getElementById("code");
+    const timerEl = document.getElementById("timer");
+    const blockMs = 15 * 60 * 1000;
+
+    async function getCode() {
+      try {
+        // Calls your secure backend (code.js)
+        const response = await fetch("/code");
+        const data = await response.json();
+        codeEl.textContent = data.code || "";
+      } catch (e) {
+        console.error("Error fetching code:", e);
+      }
     }
-    u();setInterval(u,1e3);
+
+    function updateTimer() {
+      const now = Date.now();
+      const next = Math.ceil(now / blockMs) * blockMs;
+      const remaining = Math.max(0, Math.floor((next - now) / 1000));
+      const m = String(Math.floor(remaining / 60)).padStart(2, "0");
+      const s = String(remaining % 60).padStart(2, "0");
+      timerEl.textContent = `${m}:${s}`;
+    }
+
+    setInterval(updateTimer, 1000);
+    setInterval(getCode, 1000);
+    updateTimer();
+    getCode();
   </script>
-
-  <!-- ✅ Vercel Analytics -->
-  <script defer src="/_vercel/insights/script.js"></script>
-
-
 </body>
 </html>
 
