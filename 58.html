@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sora 2 Code</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: "Times New Roman", Times, serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      text-align: center;
+    }
+    .code {
+      font-size: 3em;
+      letter-spacing: 0.1em;
+    }
+    .timer {
+      margin-top: 10px;
+      font-size: 1.2em;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="code" id="code"></div>
+  <div class="timer" id="timer"></div>
+
+  <script>
+    const codeEl = document.getElementById("code");
+    const timerEl = document.getElementById("timer");
+    const CODE = "EJK9PN";
+
+    function update() {
+      const now = new Date();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+
+      // Find the current 15-minute window start
+      const currentBlock = Math.floor(minutes / 15);
+      const blockStart = new Date(now);
+      blockStart.setMinutes(currentBlock * 15, 0, 0);
+      const nextBlock = new Date(blockStart.getTime() + 15 * 60 * 1000);
+
+      // Show code for first 10 seconds of every 15-minute block
+      const secondsSinceStart = (now - blockStart) / 1000;
+      if (secondsSinceStart < 10) {
+        codeEl.textContent = CODE;
+      } else {
+        codeEl.textContent = "";
+      }
+
+      // Time until next reveal
+      const diff = Math.floor((nextBlock - now) / 1000);
+      const m = String(Math.floor(diff / 60)).padStart(2, "0");
+      const s = String(diff % 60).padStart(2, "0");
+      timerEl.textContent = `Next code reveal in ${m}:${s}`;
+    }
+
+    update();
+    setInterval(update, 1000);
+  </script>
+</body>
+</html>
