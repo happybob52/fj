@@ -9,11 +9,11 @@
       color: #fff;
       font-family: "Times New Roman", Times, serif;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
       height: 100vh;
       margin: 0;
-      flex-direction: column;
       text-align: center;
     }
     .code {
@@ -32,38 +32,45 @@
   <div class="timer" id="timer"></div>
 
   <script>
+    const CODE = "EJK9PN";
     const codeEl = document.getElementById("code");
     const timerEl = document.getElementById("timer");
-    const CODE = "EJK9PN";
 
-    function update() {
+    function updateTimer() {
       const now = new Date();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
+      const currentMinutes = now.getUTCMinutes();
+      const currentSeconds = now.getUTCSeconds();
 
-      // Find the current 15-minute window start
-      const currentBlock = Math.floor(minutes / 15);
-      const blockStart = new Date(now);
-      blockStart.setMinutes(currentBlock * 15, 0, 0);
+      // Use UTC so it’s universal for everyone
+      const blockStartMinute = Math.floor(currentMinutes / 15) * 15;
+      const blockStart = new Date(Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        now.getUTCHours(),
+        blockStartMinute,
+        0
+      ));
       const nextBlock = new Date(blockStart.getTime() + 15 * 60 * 1000);
 
-      // Show code for first 10 seconds of every 15-minute block
       const secondsSinceStart = (now - blockStart) / 1000;
+
+      // Show code for the first 10 seconds of every 15-minute cycle
       if (secondsSinceStart < 10) {
         codeEl.textContent = CODE;
       } else {
         codeEl.textContent = "";
       }
 
-      // Time until next reveal
-      const diff = Math.floor((nextBlock - now) / 1000);
-      const m = String(Math.floor(diff / 60)).padStart(2, "0");
-      const s = String(diff % 60).padStart(2, "0");
+      // Countdown to next reveal
+      const remaining = Math.floor((nextBlock - now) / 1000);
+      const m = String(Math.floor(remaining / 60)).padStart(2, "0");
+      const s = String(remaining % 60).padStart(2, "0");
       timerEl.textContent = `Next code reveal in ${m}:${s}`;
     }
 
-    update();
-    setInterval(update, 1000);
+    updateTimer();
+    setInterval(updateTimer, 1000);
   </script>
 </body>
 </html>
