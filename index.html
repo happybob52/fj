@@ -56,19 +56,19 @@
       margin:20px 0;
     }
 
-    /* ✅ Left and right tall ads */
+    /* ✅ Side ads (small, like original) */
     .side-ad {
       position:fixed;
       top:50%;
       transform:translateY(-50%);
-      width:160px;
-      height:600px;
+      width:468px;
+      height:60px;
       z-index:1000;
     }
     .side-ad.left { left:10px; }
     .side-ad.right { right:10px; }
 
-    /* Optional: hide side ads on mobile */
+    /* Optional: hide side ads on small screens */
     @media(max-width:1100px){
       .side-ad { display:none; }
     }
@@ -76,28 +76,28 @@
 </head>
 <body>
 
-  <!-- ✅ LEFT SIDE TALL AD -->
+  <!-- ✅ LEFT SIDE AD -->
   <div class="side-ad left">
     <script type="text/javascript">
       atOptions = {
         'key' : 'b175b2aa1a21501223a0aa6073575340',
         'format' : 'iframe',
-        'height' : 600,
-        'width' : 160,
+        'height' : 60,
+        'width' : 468,
         'params' : {}
       };
     </script>
     <script type="text/javascript" src="//www.highperformanceformat.com/b175b2aa1a21501223a0aa6073575340/invoke.js"></script>
   </div>
 
-  <!-- ✅ RIGHT SIDE TALL AD -->
+  <!-- ✅ RIGHT SIDE AD -->
   <div class="side-ad right">
     <script type="text/javascript">
       atOptions = {
         'key' : 'b175b2aa1a21501223a0aa6073575340',
         'format' : 'iframe',
-        'height' : 600,
-        'width' : 160,
+        'height' : 60,
+        'width' : 468,
         'params' : {}
       };
     </script>
@@ -203,6 +203,4 @@
 
 </body>
 </html>
-
-
 
